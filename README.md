@@ -12,34 +12,130 @@ Sakshi Jiwtode   : 0006
 Himanshi Hatwar  : 0008  
 Himanshu Katrojwar :0002 
 
+This project focuses on generating captions for images by combining computer vision (feature extraction with VGG16) and natural language processing (sequence modeling with LSTMs and attention). The system learns to describe images in natural language by training on a large dataset of images and their corresponding captions.
 
-## Introduction
-Image captioning is an exciting and challenging task in the field of computer vision and natural language processing. It involves automatically generating human-readable textual descriptions for images. This interdisciplinary project combines elements of computer vision to understand the content of images, and natural language processing to generate coherent and contextually appropriate captions.
-Our image captioning project aims to develop a robust system that can accurately interpret visual content and express it in natural language, bridging the gap between visual and textual information.
-## Objectives
-The primary objectives of this image captioning project are:
+Table of Contents
+Project Overview
+Features
+Technologies Used
+Dataset
+Model Architecture
+Training Procedure
+Evaluation
+How to Run
+Results
+Future Improvements
+Acknowledgments
+1. Project Overview
+Image captioning bridges the gap between computer vision and natural language processing. Given an image, the model generates a meaningful caption describing its contents. This project leverages pre-trained feature extractors (VGG16), recurrent networks (LSTM), and an attention mechanism to generate high-quality captions.
 
-1. Develop a state-of-the-art image captioning model: Create a deep learning model that can generate accurate, relevant, and human-like captions for a wide variety of images.
-3. Ensure generalization: Design the model to perform well on diverse image types and scenarios, not just those seen in the training data.
-4. Create an efficient pipeline: Develop a streamlined process for data preparation, model training, evaluation, and inference.
-5. Implement attention mechanisms: Incorporate attention techniques to allow the model to focus on relevant parts of the image when generating different words in the caption.
+2. Features
+Feature Extraction: Uses pre-trained VGG16 to extract global image features.
+Sequence Modeling: Employs LSTM for generating captions word by word.
+Attention Mechanism: Dynamically focuses on different parts of the image while generating captions.
+Evaluation: Uses BLEU scores to assess the quality of generated captions.
+Custom Generators: Efficient handling of large datasets during training.
+3. Technologies Used
+Python 3.8+
+TensorFlow/Keras
+NumPy, Pandas, Matplotlib, Seaborn
+NLTK (Natural Language Toolkit)
+TQDM
+4. Dataset
+We use the Flickr8k Dataset, which contains:
 
-## Features
+8,000 images, each annotated with 5 captions.
+Dataset splits:
+Training set: 6,000 images
+Validation set: 1,000 images
+Test set: 1,000 images
+Preprocessing Steps:
 
-The image captioning system will include the following key features:
+Resizing and normalizing images for VGG16 input.
+Tokenizing captions and creating word-to-index mappings.
+Padding sequences for consistent input size.
+5. Model Architecture
+a. Feature Extraction (VGG16):
+A pre-trained VGG16 model extracts a fixed-size feature vector for each image.
+The output is passed through a Global Average Pooling layer to reduce dimensionality.
+b. Caption Generator (LSTM with Attention):
+Embedding Layer: Converts tokenized words into dense vector representations.
+LSTM: Predicts the next word based on the current word and image features.
+Attention Mechanism: Dynamically weights different parts of the image for each word generation step.
+6. Training Procedure
+Custom Data Generator:
+Supplies batches of image features and corresponding captions to the model.
 
-1. Multi-model architecture: Utilize a combination of Convolutional Neural Networks (CNNs) for image feature extraction and Recurrent Neural Networks (RNNs) or Transformers for sequence generation.
-2. Transfer learning: Leverage pre-trained models (e.g., ResNet, VGG, or CLIP) for efficient image feature extraction.
-3. Attention mechanism: Implement visual attention to allow the model to focus on different parts of the image when generating each word of the caption.
-4. Real-time processing: Optimize the inference pipeline for quick caption generation, allowing for real-time applications.
+Loss Function:
+Cross-entropy loss for word prediction.
 
-##  Overview 
+Callbacks Used:
 
-1. Project Overview : 
-- The task of generating textual descriptions for images
-- To create a system that can automatically generate accurate and relevant captions for various images
-- Outline the main components: Image processing, feature extraction, and natural language generation
+ModelCheckpoint: Saves the best model based on validation loss.
+EarlyStopping: Stops training if validation loss doesn't improve for 5 epochs.
+ReduceLROnPlateau: Reduces learning rate when the model plateaus.
+Hyperparameters:
 
-2. Dataset
+Epochs: 50
+Batch Size: 64
+Learning Rate: Adaptive
+7. Evaluation
+The model is evaluated using BLEU scores, which measure the overlap between generated and reference captions:
 
-- Recommended datasets: COCO, Flickr30k, or Visual Genome
+BLEU-1: Precision for unigrams (single words).
+BLEU-2: Precision for bigrams (two-word sequences).
+8. How to Run
+Prerequisites:
+Install required libraries:
+
+bash
+Copy code
+pip install tensorflow pandas numpy nltk tqdm matplotlib
+Download the Flickr8k Dataset and extract it into the project directory.
+
+Steps:
+Preprocess Data:
+Run the script to preprocess images and captions:
+
+bash
+Copy code
+python preprocess_data.py
+Train the Model:
+Train the image captioning model:
+
+bash
+Copy code
+python train_model.py
+Evaluate the Model:
+Evaluate performance using BLEU scores:
+
+bash
+Copy code
+python evaluate_model.py
+Generate Captions:
+Generate captions for a specific image:
+
+bash
+Copy code
+python generate_caption.py --image_path <path_to_image>
+9. Results
+Sample Captions:
+Image: A dog playing in the grass.
+
+Actual Captions:
+A brown dog is running through the grass.
+A dog is playing outdoors.
+Predicted Caption:
+A dog running in the grass.
+BLEU Scores:
+BLEU-1: 0.35
+BLEU-2: 0.16
+10. Future Improvements
+Use larger datasets (e.g., MS COCO) for better generalization.
+Implement transformers like BERT or ViT for enhanced performance.
+Fine-tune attention mechanisms for better focus on image regions.
+11. Acknowledgments
+Flickr8k Dataset for providing annotated images.
+The creators of TensorFlow/Keras and VGG16 for pre-trained models.
+Inspiration from academic research on image captioning using deep learning.
+
