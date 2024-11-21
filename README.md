@@ -111,22 +111,22 @@ The model is evaluated using **BLEU scores**, which measure the overlap between 
 ## **Contributions**
 This project was a collaborative effort. Each team member played a vital role in its successful completion. Below are the detailed contributions from each team member:
 
-##1. Himanshi Hatwar
+## 1. Himanshi Hatwar
 Responsible for creating an engaging and informative presentation (PPT) that effectively summarized the project's objectives, methodology, results, and future scope.
 
-##2. Himanshu Katrojwar
+## 2. Himanshu Katrojwar
 Authored the research paper for the project.
 The paper detailed the problem statement, methodologies, results, and conclusions, making it a valuable document for academic and research purposes.
 
-##3.Sakshi Jiwtode
+## 3.Sakshi Jiwtode
 Focused on compiling the project report.
 The report documented every phase of the project, including objectives, design, implementation, challenges faced, and conclusions.
 
-##4.Sakshi Warkari
+## 4.Sakshi Warkari
 Primarily responsible for writing the code that powered the project.
 This included implementing data preprocessing, the deep learning model (CNN + LSTM with attention mechanism), training scripts, evaluation metrics (BLEU scores), and the image caption generation script.
 
-##5.Prachi Dhore
+## 5.Prachi Dhore
 Took charge of building the machine learning model, including the integration of the VGG16-based encoder and the LSTM-based decoder with attention mechanism.
 Managed the GitHub repository for the project, ensuring all scripts, datasets, and documentation were properly organized and accessible.
 Contributed to debugging and testing to ensure smooth model operation.
